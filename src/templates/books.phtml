@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>SlimLibrary Api Application</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+    <style>
+        .button{
+            background-color: burlywood;
+            text-align: left;
+            text-decoration-color: whitesmoke;
+            
+        }
+    </style>
+<h1>All Books</h1>
+
+    <a href="/book/new">
+            <button class="btn btn-primary  btn-sm button">Add new book</button>
+        </a>    
+
+<?php
+if(count($books) > 0):
+?>
+<table class="pure-table">
+    <tr>
+       
+        <!--<th>Book ISBN </th>
+-->
+        <th>Book Name</th>
+        <th>Book Category</th>
+        <th>Actions</th>
+    </tr>
+
+<?php
+    $odd = true;
+    foreach($books as $book): ?>
+
+        <tr <?=$odd ? "class=\"pure-table-odd\"" : ""; ?>>
+        <!--<td><getBook_isbn()></td>-->
+        <td><?=$book->getBook_name() ?></td>
+        <td><?=$book->getBook_category() ?> ...</td>
+        <td>
+            <a href="<?=$router->pathFor('book-detail', ['id' => $book->getId()])?>">
+            <button class="btn btn-success  btn-sm button">view book</button>
+        </a>
+        </td>
+    </tr>
+
+<?php 
+    $odd = $odd ? false : true;
+    endforeach; ?>
+</table>
+<?php else: ?>
+<p>No current Books</p>
+<?php endif; ?>
+
+</body>
+</html>
+
